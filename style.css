@@ -1,0 +1,75 @@
+/* This is the main stylesheet for calculator */
+
+body{
+    margin:0;
+    background-color:#666666;
+   
+}
+
+.calculator{
+    display:grid;
+    width:400px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:10px;
+    grid-template-columns:repeat(4,auto);
+    grid-gap:5px;
+    background-color:grey;
+    padding:10px;
+    color:white;
+    font:20px monospace;
+    cursor:pointer;
+    border-radius:7px;
+    box-shadow:0px 1px 10px 1px black;
+}
+
+.button{
+    width:100%;
+    text-align:center;
+    background-color:#202427;
+    padding-top:20px;
+    padding-bottom:20px;
+    border-radius:7px;
+    box-shadow:1px 1px 4px 0px black;
+    user-select: none;
+}
+
+.button:hover{
+    background-color:#050506;
+}
+
+#eq{
+    grid-column-start:1;
+    grid-column-end:5;
+}
+
+#ce{
+    grid-column-start:2;
+    grid-column-end:4;
+}
+
+#screen{
+    width:300;
+    height:70px;
+    padding-top:50px;
+    padding-right:20px;
+    user-select:none;
+    background-color:black;
+    grid-column-start:1;
+    grid-column-end:5;
+    border-radius:7px;
+    cursor:default;
+    color:green;
+    text-align:right;
+    font-weight:bold;
+    font-size:19px;
+    overflow:scroll;
+    scrollbar-width:none;
+}
+
+
+#screen::-webkit-scrollbar{ /*  Wont work in ie firefox safari */
+    display:none;
+}
+
+
