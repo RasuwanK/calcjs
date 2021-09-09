@@ -13,14 +13,14 @@ body{
     margin-right:auto;
     margin-top:10px;
     grid-template-columns:repeat(4,auto);
-    grid-gap:5px;
-    background-color:grey;
+    grid-gap:6px;
+    background-color:black;
     padding:10px;
     color:white;
     font:20px monospace;
     cursor:pointer;
     border-radius:7px;
-    box-shadow:0px 1px 10px 1px black;
+    box-shadow:0px 1px 10px 1px grey;
 }
 
 .button{
