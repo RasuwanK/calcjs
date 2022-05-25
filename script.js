@@ -8,6 +8,12 @@ class App {
     }
 }
 
+class AppPopup extends App {
+    constructor() {
+        console.error("Error");
+    }
+} 
+
 // Array containing characters in the screen
 screenText = [];
 
