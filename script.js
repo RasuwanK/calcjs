@@ -1,6 +1,7 @@
 
 // Written by rasuwank
 
+console.log("App is ready")
 
 class App {
     constructor() {
