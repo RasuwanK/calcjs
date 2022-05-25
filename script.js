@@ -2,6 +2,12 @@
 // Written by rasuwank
 
 
+class App {
+    constructor() {
+        console.log('App');
+    }
+}
+
 // Array containing characters in the screen
 screenText = [];
 
