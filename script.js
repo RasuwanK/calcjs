@@ -1,84 +1,118 @@
+const mainScreen = document.getElementById("main");
+const subScreen = document.getElementById("sub");
+const numButtons = document.getElementsByClassName("button-nm");
+const addButton = document.getElementById("+");
+const subButton = document.getElementById("-");
+const mulButton = document.getElementById("*");
+const divButton = document.getElementById("/");
+const eqButton = document.getElementById("eq");
+const ceButton = document.getElementById("ce");
 
-// Written by rasuwank
+// Contains calculator state
+const state = {
+  screen: "",
+  operation: "",
+  prev: "",
+};
 
-console.log("App is ready")
-
-class App {
-    constructor() {
-        console.log('App');
-    }
+function reset() {
+  state.screen = "";
+  state.operation = "";
+  state.prev = "";
+  subScreen.textContent = "";
+  mainScreen.textContent = "";
 }
 
-class AppPopup extends App {
-    constructor() {
-        console.error("Error");
-    }
-} 
-
-// Array containing characters in the screen
-screenText = [];
-
-
-// Function converts an array into string
-const makeString = (arr) => {
-    let str = '';
-    for(let char of arr){
-        str += char;
-    }
-
-    return str;
+// Updating the state with the ui
+function setScreen(value) {
+  state.screen += value;
+  // Finally update the ui
+  mainScreen.textContent = state.screen;
 }
 
-
-const render = (screen) => {
-    screen.innerHTML = makeString(screenText);
+function calc() {
+  subScreen.textContent += state.screen;
+  switch (state.operation) {
+    case "+":
+      state.screen = parseInt(state.screen) + parseInt(state.prev);
+      break;
+    case "-":
+      state.screen = parseInt(state.prev) - parseInt(state.screen);
+      break;
+    case "*":
+      state.screen = parseInt(state.prev) * parseInt(state.screen);
+      break;
+    case "/":
+      state.screen = parseInt(state.prev) / parseInt(state.screen);
+      break;
+    default:
+      state.screen = "";
+      state.operation = "";
+      state.prev = "";
+      subScreen.textContent = "";
+      mainScreen.textContent = "Invalid operation";
+  }
+  mainScreen.textContent = state.screen;
 }
 
-// Screen of the calculator
-const screen = document.getElementById('screen');
+// Updating calculator operation and the ui
+function setOperation(operator) {
+  if (typeof operator !== "string") {
+    throw new Error("Invalid data type for the argument 'operator'");
+  }
 
+  switch (operator) {
+    case "+":
+      state.operation = operator;
+      break;
+    case "-":
+      state.operation = operator;
+      break;
+    case "*":
+      state.operation = operator;
+      break;
+    case "/":
+      state.operation = operator;
+      break;
+    default:
+      throw new Error("Invalid operator");
+  }
 
-// Group of buttons
-const numberButtons = document.getElementsByClassName('number');
+  state.prev = state.screen;
+  state.screen = "";
 
-const functionButtons = document.getElementsByClassName('func');
+  mainScreen.textContent = "";
+  subScreen.textContent = `${state.prev}${state.operation}`;
+}
 
-const clearButton = document.getElementById('ce');
+for (let index = 0; index < numButtons.length; ++index) {
+  const numButton = numButtons[index];
 
-const equalButton = document.getElementById('eq');
+  if (numButton) {
+    numButton.addEventListener("click", () => {
+      setScreen(numButton.id);
+    });
+  }
+}
 
-// Cleaning the screen
-clearButton.addEventListener('click',() => {
-    screenText = [];
-    screen.innerHTML = '0';
-})
-
-equalButton.addEventListener('click',() => {
-
-    //if(screen.innerHTML.indexOf('//') == -1 || screen.innerHTML.indexOf('/*') == -1){
-        try{
-            screen.innerHTML = eval(screen.innerHTML);
-            screenText = [];
-
-        }catch(e){
-            screen.innerHTML = "Malformed expression";
-            screenText = [];
-        }
+addButton.addEventListener("click", () => {
+  setOperation("+");
 });
 
-// Asigning all the functions for number buttons
-for(let element of numberButtons){
-    element.addEventListener("click", () => {
-        screenText.push(element.id);
-        render(screen);
-    })
-}
+subButton.addEventListener("click", () => {
+  setOperation("-");
+});
 
-for(let element of functionButtons){
-    element.addEventListener("click" , () => {
-        screenText.push(element.id);
-        render(screen);
-    })
-}
+divButton.addEventListener("click", () => {
+  setOperation("/");
+});
 
+mulButton.addEventListener("click", () => {
+  setOperation("*");
+});
 
+ceButton.addEventListener("click", () => {});
+
+eqButton.addEventListener("click", () => {
+  calc();
+});
